@@ -45,7 +45,7 @@ parser.add_argument("--hr_height", type=int, default=256, help="high res. image 
 parser.add_argument("--hr_width", type=int, default=256, help="high res. image width")
 parser.add_argument("--channels", type=int, default=3, help="number of image channels")
 parser.add_argument("--sample_interval", type=int, default=100, help="interval between saving image samples")
-parser.add_argument("--checkpoint_interval", type=int, default=-1, help="interval between model checkpoints")
+parser.add_argument("--checkpoint_interval", type=int, default=100, help="interval between model checkpoints")
 opt = parser.parse_args()
 print(opt)
 
@@ -84,7 +84,7 @@ optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt
 Tensor = torch.cuda.FloatTensor if cuda else torch.Tensor
 
 dataloader = DataLoader(
-    ImageDataset("../../data/%s" % opt.dataset_name, hr_shape=hr_shape),
+    ImageDataset("../data/%s" % opt.dataset_name, hr_shape=hr_shape),
     batch_size=opt.batch_size,
     shuffle=True,
     num_workers=opt.n_cpu,
